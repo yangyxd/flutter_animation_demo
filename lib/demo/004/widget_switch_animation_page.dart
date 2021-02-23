@@ -6,26 +6,14 @@ class WidgetSwitchAnimationPage extends StatefulWidget {
   _WidgetSwitchAnimationPageState createState() => _WidgetSwitchAnimationPageState();
 }
 
-class _WidgetSwitchAnimationPageState extends State<WidgetSwitchAnimationPage> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+class _WidgetSwitchAnimationPageState extends State<WidgetSwitchAnimationPage> {
   Widget _child;
   int flag = 0;
   bool _scaleContainer = true;
   bool _slideTransition = false;
   bool _scaleTransition = false;
 
-  @override
-  void initState() {
-    _controller = AnimationController(vsync: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+  /// 动画区域背景色
   final _colors = <Color>[Colors.green, Colors.blue, Colors.white, Colors.red];
   
   @override
