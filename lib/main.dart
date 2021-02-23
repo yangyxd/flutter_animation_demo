@@ -6,6 +6,7 @@ import 'package:flutter_animation_demo/utils.dart';
 
 import 'demo/001/time_back_animation_page.dart';
 import 'demo/002/counter_animation_page.dart';
+import 'demo/003/sliding_box_animation_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,8 +15,9 @@ void main() {
 class MyApp extends StatelessWidget {
 
   static final routes = <RouteItem>[
-    RouteItem("001", desc: "倒计时动画", builder: (context) => TimeBackAnimationPage()),
-    RouteItem("002", desc: "翻滚数字动画", builder: (context) => CounterAnimationPage()),
+    RouteItem("/001", desc: "倒计时动画", builder: (context) => TimeBackAnimationPage()),
+    RouteItem("/002", desc: "翻滚数字动画", builder: (context) => CounterAnimationPage()),
+    RouteItem("/003", desc: "方块交错动画", builder: (context) => SlidingBoxAnimationPage()),
   ];
 
   @override
@@ -91,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return ListTile(
             title: Text(item.desc ?? item.name),
             trailing: Icon(Icons.arrow_forward_ios_rounded, size: 12),
-            leading: Text("$index", style: TextStyle(
+            leading: Text("${index + 1}", style: TextStyle(
               color: Colors.black38,
               fontFamily: Utils.fontFamily
             )),

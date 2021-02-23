@@ -52,7 +52,7 @@ class _CounterAnimationPageState extends State<CounterAnimationPage> {
             });
           }, tooltip: "+1"),
           SizedBox(height: 8),
-          FloatingActionButton(child: Icon(Icons.clear), onPressed: () {
+          FloatingActionButton(child: Icon(Icons.arrow_drop_down), onPressed: () {
             setState(() {
               value = value - 1;
             });
