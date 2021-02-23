@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_animation_demo/empty_page.dart';
@@ -26,6 +27,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor: const Color(0xff000000),
+      systemNavigationBarDividerColor: null,
+      statusBarColor: const Color(0x00000000),
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
+    ));
 
     final _routes = <String, WidgetBuilder>{};
     routes.map((e) => _routes[e.name] = e.builder);
