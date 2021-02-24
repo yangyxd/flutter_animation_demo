@@ -87,5 +87,5 @@ class _WidgetSwitchAnimationPageState extends State<WidgetSwitchAnimationPage> {
   }
 
   Widget _buildImage() =>
-      Image.network("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3136075639,3338708347&fm=26&gp=0.jpg");
+      Image.network("https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3652892515,45225657&fm=26&gp=0.jpg");
 }

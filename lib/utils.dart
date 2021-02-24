@@ -4,6 +4,9 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+export 'size_utils.dart';
+
+/// 基础工具类
 class Utils {
 
   const Utils._();

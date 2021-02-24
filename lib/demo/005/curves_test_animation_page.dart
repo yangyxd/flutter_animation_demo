@@ -104,6 +104,7 @@ class _CurvesTestAnimationPageState extends State<CurvesTestAnimationPage> {
               )
             ],
           ),
+
           AnimatedPadding(
             padding: EdgeInsets.only(left: left, top: top),
             duration: Duration(milliseconds: 1500),

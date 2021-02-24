@@ -10,6 +10,11 @@ import 'demo/002/counter_animation_page.dart';
 import 'demo/003/sliding_box_animation_page.dart';
 import 'demo/004/widget_switch_animation_page.dart';
 import 'demo/005/curves_test_animation_page.dart';
+import 'demo/006/tween_builder_animation_page.dart';
+import 'demo/007/animated_builder_demo_page.dart';
+import 'demo/008/breathing_animation_page.dart';
+import 'demo/009/snowflake_animation_page.dart';
+import 'size_utils.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,8 +26,12 @@ class MyApp extends StatelessWidget {
     RouteItem("/001", desc: "倒计时动画", builder: (context) => TimeBackAnimationPage()),
     RouteItem("/002", desc: "翻滚数字动画", builder: (context) => CounterAnimationPage()),
     RouteItem("/003", desc: "方块交错动画", builder: (context) => SlidingBoxAnimationPage()),
-    RouteItem("/004", desc: "不同控件切换过渡动画", builder: (context) => WidgetSwitchAnimationPage()),
+    RouteItem("/004", desc: "小部件切换过渡动画", builder: (context) => WidgetSwitchAnimationPage()),
     RouteItem("/005", desc: "动画控件及曲线(Curves)", builder: (context) => CurvesTestAnimationPage()),
+    RouteItem("/006", desc: "补间动画(TweenAnimationBuilder)", builder: (context) => TweenBuilderAnimationPage()),
+    RouteItem("/007", desc: "万能的自定义动画(AnimatedBuilder)", builder: (context) => AnimatedBuilderDemoPage()),
+    RouteItem("/008", desc: "478呼吸法动画", builder: (context) => BreathingAnimationPage()),
+    RouteItem("/009", desc: "下雪堆雪人动画", builder: (context) => SnowflakeAnimationPage()),
   ];
 
   @override
@@ -35,6 +44,8 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
     ));
+
+    SizeUtils.init();
 
     final _routes = <String, WidgetBuilder>{};
     routes.map((e) => _routes[e.name] = e.builder);
