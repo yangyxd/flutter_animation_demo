@@ -117,16 +117,16 @@ class MyPainter extends CustomPainter {
 }
 
 class Snowflake {
-  double x = Random().nextDouble() * SizeUtils.screenWidth;
-  double y = Random().nextDouble() * SizeUtils.screenHeight;
+  double x = Random().nextDouble() * SizeUtils.screenWidthDp;
+  double y = Random().nextDouble() * SizeUtils.screenHeightDp;
   double radius = Random().nextDouble() * 3 + 1.5;
   double velocity = Random().nextDouble() * 4 + 1;
 
   fall () {
     y += velocity;
-    if (y > SizeUtils.screenHeight + 50) {
+    if (y > SizeUtils.screenHeightDp + 50) {
       y = 0;
-      x = Random().nextDouble() * SizeUtils.screenWidth;
+      x = Random().nextDouble() * SizeUtils.screenWidthDp;
       radius = Random().nextDouble() * 3 + 1.5;
       velocity = Random().nextDouble() * 4 + 1;
     }

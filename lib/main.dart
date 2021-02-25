@@ -14,6 +14,7 @@ import 'demo/006/tween_builder_animation_page.dart';
 import 'demo/007/animated_builder_demo_page.dart';
 import 'demo/008/breathing_animation_page.dart';
 import 'demo/009/snowflake_animation_page.dart';
+import 'demo/010/water_wave_login_animation_page.dart';
 import 'size_utils.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
     RouteItem("/007", desc: "万能的自定义动画(AnimatedBuilder)", builder: (context) => AnimatedBuilderDemoPage()),
     RouteItem("/008", desc: "478呼吸法动画", builder: (context) => BreathingAnimationPage()),
     RouteItem("/009", desc: "下雪堆雪人动画", builder: (context) => SnowflakeAnimationPage()),
+    RouteItem("/010", desc: "水波浪动画登录页", builder: (context) => WaterWaveLoginAnimationPage()),
   ];
 
   @override
