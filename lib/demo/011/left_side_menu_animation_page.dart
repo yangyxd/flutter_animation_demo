@@ -109,7 +109,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
-  final itemAniTime = 100;
+  final itemAniTime = 300;
   AnimationController _controller;
   ScrollController _scrollerController;
   int _dCount = 1;
@@ -145,7 +145,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         _dCount++;
       // 根据最多显示的菜单数量，获得一个动画最大时间
       _controller = AnimationController(vsync: this,
-          duration: Duration(milliseconds: min(_dCount * itemAniTime, 600))
+          duration: Duration(milliseconds: min(_dCount * itemAniTime, 800))
       )..forward();
     }
 
@@ -262,8 +262,8 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
         transform: Matrix4.identity()
           ..setEntry(3, 2, 0.001)
           ..rotateY(_reverse
-            ? 1.0 - _animation.value
-            : 1.0 - _animation.value
+              ? 1.0 - _animation.value
+              : 1.0 - _animation.value
           )
     );
   }
@@ -273,7 +273,7 @@ class _SideMenuState extends State<SideMenu> with TickerProviderStateMixin {
     _closeing = true;
     if (_scrollerController.position.pixels > 0)
       _scrollerController.jumpTo(0.0);
-    _controller.duration = Duration(milliseconds: 350);
+    _controller.duration = Duration(milliseconds: 500);
     await _controller.reverse(from: 1.0);
     Navigator.of(context).pop();
   }
@@ -288,7 +288,7 @@ class FadePopupRoute<T> extends PopupRoute<T> {
   Color get barrierColor => backgroundColor ?? Colors.black54;
 
   @override
-  bool get barrierDismissible => true;
+  bool get barrierDismissible => false;
 
   @override
   String get barrierLabel => "_SideMenuFadePopupRoute";
@@ -301,5 +301,5 @@ class FadePopupRoute<T> extends PopupRoute<T> {
 
   @override
   Widget buildPage(context, animation, secondaryAnimation) =>
-      MediaQuery.removePadding(context: context, removeTop: true, child: widget);
+      MediaQuery.removePadding(context: context, child: widget);
 }

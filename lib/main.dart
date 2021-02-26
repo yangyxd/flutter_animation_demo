@@ -16,7 +16,7 @@ import 'demo/008/breathing_animation_page.dart';
 import 'demo/009/snowflake_animation_page.dart';
 import 'demo/010/water_wave_login_animation_page.dart';
 import 'demo/011/left_side_menu_animation_page.dart';
-
+import 'demo/012/bubbles_animation_login_page.dart';
 import 'size_utils.dart';
 
 void main() {
@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
     RouteItem("/009", desc: "下雪堆雪人动画", builder: (context) => SnowflakeAnimationPage()),
     RouteItem("/010", desc: "水波浪动画登录页", builder: (context) => WaterWaveLoginAnimationPage()),
     RouteItem("/011", desc: "自定义动画效果边栏导航", builder: (context) => LeftSideMenuAnimationPage()),
+    RouteItem("/012", desc: "气泡动画背景登录页", builder: (context) => BubblesAnimationLoginPage()),
   ];
 
   @override
