@@ -122,49 +122,53 @@ class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> w
       bottom: 16,
       left: 0,
       right: 0,
+      top: 50,
       child: SafeArea(
-        child: FadeTransition(
-          opacity: _fadeController,
+        child: Align(
+          alignment: Alignment.bottomCenter,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.only(left: 45, right: 45),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                buildInputWidget("账号", icon: Icons.phone_android_outlined),
-                SizedBox(height: 14),
-                buildInputWidget("密码", icon: Icons.lock_outline, isPass: true),
-                SizedBox(height: 14),
-                SizedBox(width: double.infinity, child: Text("忘记密码",
-                    textAlign: TextAlign.end, style: TextStyle(
-                        fontSize: 14, color: Colors.blue
-                    ))),
-                SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                    child: Text("登录"),
-                    style: ButtonStyle(
-                        shadowColor: MaterialStateProperty.all(Colors.black12)
+            padding: const EdgeInsets.fromLTRB(45, 0, 45, 16),
+            child: FadeTransition(
+              opacity: _fadeController,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  buildInputWidget("账号", icon: Icons.phone_android_outlined),
+                  SizedBox(height: 14),
+                  buildInputWidget("密码", icon: Icons.lock_outline, isPass: true),
+                  SizedBox(height: 14),
+                  SizedBox(width: double.infinity, child: Text("忘记密码",
+                      textAlign: TextAlign.end, style: TextStyle(
+                          fontSize: 14, color: Colors.blue
+                      ))),
+                  SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      child: Text("登录"),
+                      style: ButtonStyle(
+                          shadowColor: MaterialStateProperty.all(Colors.black12)
+                      ),
+                      onPressed: () => null,
                     ),
-                    onPressed: () => null,
                   ),
-                ),
-                SizedBox(height: 14),
-                SizedBox(
-                  width: double.infinity,
-                  height: 42,
-                  child: ElevatedButton(
-                    child: Text("注册"),
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.75)),
-                        shadowColor: MaterialStateProperty.all(Colors.black12)
+                  SizedBox(height: 14),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 42,
+                    child: ElevatedButton(
+                      child: Text("注册"),
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(Colors.lightBlue.withOpacity(0.75)),
+                          shadowColor: MaterialStateProperty.all(Colors.black12)
+                      ),
+                      onPressed: () => null,
                     ),
-                    onPressed: () => null,
                   ),
-                ),
-                SizedBox(height: 32),
-              ],
+                  SizedBox(height: 32),
+                ],
+              ),
             ),
           ),
         ),
