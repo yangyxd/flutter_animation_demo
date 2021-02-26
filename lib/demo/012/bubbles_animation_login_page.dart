@@ -11,33 +11,20 @@ class BubblesAnimationLoginPage extends StatefulWidget {
   _BubblesAnimationLoginPageState createState() => _BubblesAnimationLoginPageState();
 }
 
-class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> with TickerProviderStateMixin {
+class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> with SingleTickerProviderStateMixin {
   AnimationController _controller;
-  AnimationController _fadeController;
-  List<Bobble> items;
 
   @override
   void initState() {
-    SizeUtils.updateMediaData();
-
     _controller = AnimationController(vsync: this,
-      duration: Duration(seconds: 1)
-    );
-
-    _fadeController = AnimationController(vsync: this,
       duration: Duration(milliseconds: 1800),
     )..forward();
-
-    items = List<Bobble>.generate(25, (index) => Bobble());
-
-    Utils.sleep(500, () => this.mounted ? _controller.repeat() : null);
     super.initState();
   }
 
   @override
   void dispose() {
     _controller.dispose();
-    _fadeController.dispose();
     super.dispose();
   }
   
@@ -50,9 +37,7 @@ class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> w
           // 渐变背景
           buildBackgroundWidget(),
           // 气泡动画
-          buildBobbleWidget(context),
-          // 高斯模糊背景
-          buildBlurBackgroundLayer(),
+          BobbleAnimationWidget(delay: 500),
           // 顶部文字
           buildHeaderWidget(),
           // 顶部导航
@@ -79,27 +64,6 @@ class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> w
             )
           ),
         );
-  }
-
-  Widget buildBobbleWidget(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: AnimatedBuilder(animation: _controller, builder: (context, _) {
-        return CustomPaint(
-          painter: CustomBobblePainter(items, _controller.isAnimating),
-        );
-      }),
-    );
-  }
-
-  Widget buildBlurBackgroundLayer() {
-    return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 0.3, sigmaY: 0.3),
-      child: Container(
-        color: Colors.white.withOpacity(0.1),
-      ),
-    );
   }
 
   Widget buildHeaderWidget() {
@@ -129,7 +93,7 @@ class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> w
           child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(45, 0, 45, 16),
             child: FadeTransition(
-              opacity: _fadeController,
+              opacity: _controller,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -212,6 +176,103 @@ class _BubblesAnimationLoginPageState extends State<BubblesAnimationLoginPage> w
 
 }
 
+/// 泡泡动画小部件
+class BobbleAnimationWidget extends StatefulWidget {
+  /// 泡泡数量
+  final int count;
+  /// 动画速度
+  final Duration duration;
+  /// 动画开始延时
+  final int delay;
+
+  final double width;
+  final double height;
+
+  const BobbleAnimationWidget({Key key, this.count = 20,
+    this.duration,
+    this.delay,
+    this.width = double.infinity,
+    this.height = double.infinity
+  }) : super(key: key);
+
+  @override
+  _BobbleAnimationWidgetState createState() => _BobbleAnimationWidgetState();
+}
+
+class _BobbleAnimationWidgetState extends State<BobbleAnimationWidget> with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  List<Bobble> items;
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this,
+      duration: widget.duration ?? Duration(seconds: 10)
+    );
+
+    items = List<Bobble>.generate(widget.count, (index) => Bobble());
+
+    if (widget.delay == null || widget.delay <= 0) {
+      _controller.repeat();
+    } else {
+      Utils.sleep(widget.delay, () {
+        if (this.mounted)
+          _controller.repeat();
+      });
+    }
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _controller.duration = widget.duration;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: Stack(
+        children: [
+          buildBobbleWidget(context),
+          // 高斯模糊层
+          buildBlurBackgroundLayer()
+        ],
+      ),
+    );
+  }
+
+  Widget buildBobbleWidget(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: AnimatedBuilder(animation: _controller, builder: (context, _) {
+        return CustomPaint(
+          painter: CustomBobblePainter(items, _controller.isAnimating),
+        );
+      }),
+    );
+  }
+
+  Widget buildBlurBackgroundLayer() {
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 0.3, sigmaY: 0.3),
+      child: Container(
+        color: Colors.white.withOpacity(0.1),
+      ),
+    );
+  }
+}
+
+
 /// 创建画布
 class CustomBobblePainter extends CustomPainter{
   final List<Bobble> items;
@@ -249,6 +310,10 @@ class Bobble {
 
   double _opacity = 0.0;
 
+  Bobble() {
+    _opacity = min(opacity, max(0.1, Random().nextDouble() - 0.05));
+  }
+
   play(Size size) {
     // 据据点的速度和角度运动
     final _center = Offset(speed * cos(theta), speed * sin(theta));
@@ -261,8 +326,10 @@ class Bobble {
       final r2 = radius * 2;
       x = Random().nextDouble() * (size.width - r2) + radius * 0.5;
       y = Random().nextDouble() * (size.height - r2)  + radius * 0.5;
+      bool isChangeOpacity = opacity <= _opacity;
       opacity = max(0.1, Random().nextDouble() - 0.05);
-      _opacity = 0.0;
+      if (isChangeOpacity)
+        _opacity = 0.0;
     }
 
     // 透明度渐变出现
