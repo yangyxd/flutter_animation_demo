@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_animation_demo/demo/012/bubbles_animation_login_page.dart';
 
+/// 淡入渐变裁剪滚动区域效果
 class ClipScrollViewPage extends StatefulWidget {
   @override
   _ClipScrollViewPageState createState() => _ClipScrollViewPageState();
@@ -94,7 +95,7 @@ class _ClipScrollViewPageState extends State<ClipScrollViewPage> with SingleTick
   }
 
   final _messages = <String>[
-    "上一期我们做了点基本的控制台效果，这一期，我们继续做一些简单的动画，让页面酷炫起来。"
+    "上一期我们做了点基本的控制台效果，这一期，我们继续做一些简单的动画，让页面酷炫起来。",
     "你好吗？",
     "声音真好听",
     "有两下子啊，咋不整个扣扣群？",

@@ -1,4 +1,8 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_demo/model/dao.dart';
 
 /// 不同控件切换过渡动画
 class WidgetSwitchAnimationPage extends StatefulWidget {
@@ -87,5 +91,5 @@ class _WidgetSwitchAnimationPageState extends State<WidgetSwitchAnimationPage> {
   }
 
   Widget _buildImage() =>
-      Image.network("https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3652892515,45225657&fm=26&gp=0.jpg");
+      CachedNetworkImage(imageUrl: Dao.images[Random().nextInt(Dao.images.length - 1)]);
 }
