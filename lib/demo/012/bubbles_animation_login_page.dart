@@ -321,13 +321,14 @@ class Bobble {
     y = _center.dy + y;
 
     // 边界计算
-    if ((x + radius < 0 || x - radius > size.width) && (y + radius < 0 || y - radius > size.height)) {
-      radius = Random().nextDouble() * 100 + 20;
+    if ((x + radius < 0 || x - radius > size.width) || (y + radius < 0 || y - radius > size.height)) {
+      final _random = Random();
+      radius = _random.nextDouble() * 100 + 20;
       final r2 = radius * 2;
-      x = Random().nextDouble() * (size.width - r2) + radius * 0.5;
-      y = Random().nextDouble() * (size.height - r2)  + radius * 0.5;
+      x = _random.nextDouble() * (size.width - r2) + radius * 0.5;
+      y = _random.nextDouble() * (size.height - r2)  + radius * 0.5;
       bool isChangeOpacity = opacity <= _opacity;
-      opacity = max(0.1, Random().nextDouble() - 0.05);
+      opacity = max(0.1, _random.nextDouble() - 0.05);
       if (isChangeOpacity)
         _opacity = 0.0;
     }

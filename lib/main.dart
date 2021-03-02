@@ -20,6 +20,7 @@ import 'demo/012/bubbles_animation_login_page.dart';
 import 'demo/013/clip_scroll_view_page.dart';
 import 'demo/014/image_hero_animation_page.dart';
 import 'demo/015/clock_animation_page.dart';
+import 'demo/016/transform_3d_view_page.dart';
 import 'size_utils.dart';
 
 void main() {
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
     RouteItem("/013", desc: "渐变裁剪滚动区域效果", builder: (context) => ClipScrollViewPage()),
     RouteItem("/014", desc: "插画长廊页面过渡动画效果", builder: (context) => ImageHeroAnimationPage()),
     RouteItem("/015", desc: "好看的钟表效果", builder: (context) => ClockAnimationPage()),
+    RouteItem("/016", desc: "酷炫3D变换效果", builder: (context) => Transform3DViewPage()),
   ];
 
   @override
