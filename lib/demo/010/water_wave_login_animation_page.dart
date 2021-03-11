@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../utils.dart';
 
 /// 波浪效果登录页
 /// 参考： https://www.cnblogs.com/yangyxd/p/14428913.html
@@ -79,6 +82,8 @@ class _WaterWaveLoginAnimationPageState
     );
   }
 
+  double _width;
+
   Widget _buildBottomEditAndButton(double height) {
     return Positioned(
         top: height,
@@ -97,15 +102,34 @@ class _WaterWaveLoginAnimationPageState
               SizedBox(height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all(Size(double.infinity, 50.0)),
-                  ),
-                  child: Text('登录',
-                      style: TextStyle(color: Colors.white, fontSize: 20)),
-                ),
+                child: StatefulBuilder(builder: (context, state) {
+                  return AnimatedSizeButton(
+                    width: _width ?? MediaQuery.of(context).size.width - 32,
+                    height: 45,
+                    child: _width == 45
+                        ? SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.0,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                    )
+                        : Text("登录"),
+                    onTap: () {
+                      state(() {
+                        _width = _width == 45 ? MediaQuery.of(context).size.width - 32 : 45;
+                      });
+                      Utils.sleep(1500, () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("登录成功")
+                        ));
+                        if (this.mounted) Navigator.maybePop(context);
+                      });
+                    },
+                  );
+                }),
               ),
+              SizedBox(height: 16),
             ],
           ),
         ));
@@ -163,4 +187,39 @@ class HeaderClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(oldClipper) => true;
+}
+
+class AnimatedSizeButton extends StatelessWidget {
+  final double width, height;
+  final Duration duration;
+  final Widget child;
+  final VoidCallback onTap;
+
+  const AnimatedSizeButton({
+    Key key,
+    this.width,
+    this.height,
+    this.child,
+    this.duration,
+    this.onTap
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: duration ?? Duration(milliseconds: 300),
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        child: child,
+        onPressed: onTap,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(height)
+          ))
+        ),
+      ),
+    );
+  }
+
 }

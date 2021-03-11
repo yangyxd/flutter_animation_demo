@@ -79,7 +79,7 @@ class AnimationCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     /// 计算一下文字的大小
     final painter = TextPainter(
-        locale: Localizations.localeOf(context, nullOk: true),
+        locale: Localizations.localeOf(context),
         textDirection: TextDirection.ltr,
         textScaleFactor: 1.2,
         maxLines: 1,
