@@ -22,6 +22,8 @@ import 'demo/014/image_hero_animation_page.dart';
 import 'demo/015/clock_animation_page.dart';
 import 'demo/016/transform_3d_view_page.dart';
 import 'demo/017/path_painter_animation_page.dart';
+import 'demo/018/sky_dash_animation_page.dart';
+import 'demo/019/plasma_animation_page.dart';
 import 'size_utils.dart';
 
 void main() {
@@ -48,6 +50,9 @@ class MyApp extends StatelessWidget {
     RouteItem("/015", desc: "好看的钟表效果", builder: (context) => ClockAnimationPage()),
     RouteItem("/016", desc: "酷炫3D变换效果", builder: (context) => Transform3DViewPage()),
     RouteItem("/017", desc: "路径绘制动画", builder: (context) => PathPainterAnimationPage()),
+    RouteItem("/018", desc: "天空飞行动画", builder: (context) => SkyDashAnimationPage()),
+    RouteItem("/019", desc: "等离子炫彩变幻动画1", builder: (context) => PlasmaAnimationPage(flag: 1)),
+    RouteItem("/020", desc: "等离子炫彩变幻动画2", builder: (context) => PlasmaAnimationPage(flag: 2)),
   ];
 
   @override
